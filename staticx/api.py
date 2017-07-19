@@ -88,6 +88,20 @@ def generate(prog, output, libs=None, bootloader=None, strip=False):
     bootloader: Override the bootloader binary
     strip: Strip binaries to reduce size
     """
+
+    # Script?
+    with open(prog, 'rb') as f:
+        if f.read(2) == b'#!':
+            path = f.read(1024).split(b'\n')[0]
+            print("Script path:", path)
+            raise Hell
+
+
+
+
+
+
+
     if not bootloader:
         bootloader = _locate_bootloader()
     _check_bootloader_compat(bootloader, prog)
