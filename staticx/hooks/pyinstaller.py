@@ -40,6 +40,9 @@ def process_pyinstaller_archive(ar, prog):
             # Extract it to a temporary location
             x, data = pyi_ar.extract(n)
             tmppath = os.path.join(tmpdir, name)
+            directory = os.path.dirname(tmppath)
+            if not os.path.exists(directory):
+                os.makedirs(directory)
             logging.debug("Extracting to {}".format(tmppath))
             with open(tmppath, 'wb') as f:
                 f.write(data)
