@@ -82,6 +82,8 @@ def get_shobj_deps(path):
         return False
 
     for line in output.splitlines():
+        if line.strip() == 'statically linked':
+            continue
         m = pat.match(line)
         if not m:
             raise ToolError('ldd', "Unexpected line in ldd output: " + line)
